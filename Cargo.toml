@@ -4,3 +4,9 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+rquickjs = { version = "0.6", features = [
+  "array-buffer",
+  "either",
+  "macro",
+  "futures",
+], default-features = false }
