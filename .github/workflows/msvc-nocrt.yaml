@@ -1,9 +1,11 @@
-name: msvc
+name: msvc-nocrt
 
 on:
   push:
     branches:
       - "main"
+
+
 
 jobs:
   build:
@@ -18,6 +20,8 @@ jobs:
         with:
           toolchain: nightly-x86_64-pc-windows-msvc
       - name: build-msvc
+        env:
+          RUSTFLAGS:  ""
         run: |
           cargo build --target x86_64-pc-windows-msvc --release
 
