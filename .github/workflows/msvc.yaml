@@ -1,0 +1,28 @@
+name: Releases
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Setup Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: nightly-x86_64-pc-windows-msvc
+      - name: build-msvc
+        run: |
+          cargo build --target x86_64-pc-windows-msvc --release
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: msvc
+          path: ./target/*/release/rust-msvc-static.exe
